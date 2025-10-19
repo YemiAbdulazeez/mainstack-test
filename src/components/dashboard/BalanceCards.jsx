@@ -17,7 +17,7 @@ const BalanceCards = ({ wallet }) => (
             </p>
             
             {/* Withdraw Button - Right next to the amount */}
-            <button className="px-5 py-3 bg-gray-900 text-white text-sm font-medium rounded-full hover:bg-gray-800 transition-colors shadow-md whitespace-nowrap">
+            <button className="lg:px-10 px-4 py-3 bg-gray-900 text-white ms-0 lg:ms-12 text-sm font-medium rounded-full hover:bg-gray-800 transition-colors shadow-md whitespace-nowrap">
               Withdraw
             </button>
           </div>

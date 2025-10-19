@@ -29,7 +29,7 @@ const RevenueChart = () => {
           vectorEffect="non-scaling-stroke"
         />
       </svg>
-      <div className="flex -mt-16 justify-between text-xs text-gray-400 ">
+      <div className="flex -mt-12 justify-between text-xs text-gray-400 ">
         <span>Apr 1, 2022</span>
         <span>Apr 30, 2022</span>
       </div>

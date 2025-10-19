@@ -69,7 +69,12 @@ const Header = () => {
               <Icon src={headerIcons.apps} className="w-5 h-5" alt="Apps" />
               <span>Apps</span>
               {isAppsOpen && (
-                <span className="text-gray-400 border-s border-gray-50" >{" "} Link in Bio</span>
+                <div className="flex items-center space-x-3">
+                  <div className="w-px h-4 bg-gray-200"></div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-gray-400 text-sm">Link in Bio</span>
+                  </div>
+                </div>
               )}
             </button>
             <AppMenu isOpen={isAppsOpen} onClose={() => setIsAppsOpen(false)} />
