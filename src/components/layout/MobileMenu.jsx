@@ -48,7 +48,7 @@ const MobileMenu = ({ isOpen, onClose, onAppsClick }) => {
             }}
             className="flex items-center space-x-3 px-4 py-3 rounded-full text-sm font-medium text-gray-600 hover:bg-gray-100 w-full text-left"
           >
-            <Icon src={headerIcons.apps} className="w-5 h-5" alt="Apps" />
+            <Icon src={headerIcons.apps} className="w-5  h-5" alt="Apps" />
             <span>Apps</span>
           </button>
         </div>

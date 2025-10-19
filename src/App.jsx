@@ -15,11 +15,11 @@ function App() {
       <Header />
       <AppSidebar />
 
-      <main className="px-4 sm:px-6 lg:px-8 xl:px-32 py-6 lg:py-12 relative">
+      <main className="px-6  lg:px-8 xl:px-32 py-6 lg:py-12 relative">
         <div className="max-w-7xl mx-auto">
           <BalanceCards wallet={mockWallet} />
 
-          <hr className="my-6 lg:my-8 border-gray-100" />
+          
           <TransactionsList
             transactions={mockTransactions}
             onFilterClick={() => setIsFilterOpen(true)}

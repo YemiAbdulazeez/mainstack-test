@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { navItems, mockUser, headerIcons } from '../../data/mockData';
-import Icon from '../ui/Icon';
-import UserMenu from '../ui/UserMenu';
-import AppMenu from '../ui/AppMenu';
-import MobileMenu from './MobileMenu';
-import Logo from "../../../public/icons/mainstack-logo.svg"
+import React, { useState } from "react";
+import { navItems, mockUser, headerIcons } from "../../data/mockData";
+import Icon from "../ui/Icon";
+import UserMenu from "../ui/UserMenu";
+import AppMenu from "../ui/AppMenu";
+import MobileMenu from "./MobileMenu";
+import Logo from "../../../public/icons/mainstack-logo.svg";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -26,10 +26,10 @@ const Header = () => {
       <header className="flex justify-between items-center p-4 bg-white shadow-sm rounded-full mx-2 lg:mx-4 my-2 px-4 border-b border-gray-100 relative z-20">
         {/* Logo and Mobile Menu Button */}
         <div className="flex items-center">
-        <div className="text-xl font-bold text-gray-800">
-  <img src={Logo} alt="Logo" className="h-6 w-auto" />
-</div>
-          <button 
+          <div className="text-xl font-bold text-gray-800">
+            <img src={Logo} alt="Logo" className="h-8 w-auto" />
+          </div>
+          <button
             className="lg:hidden ml-4 p-2"
             onClick={() => setIsMobileMenuOpen(true)}
           >
@@ -55,7 +55,7 @@ const Header = () => {
               <span>{item.name}</span>
             </a>
           ))}
-          
+
           {/* Apps Dropdown Trigger */}
           <div className="relative">
             <button
@@ -69,9 +69,8 @@ const Header = () => {
               <Icon src={headerIcons.apps} className="w-5 h-5" alt="Apps" />
               <span>Apps</span>
               {isAppsOpen && (
-                <span className="text-gray-400"> - Link in Bio</span>
+                <span className="text-gray-400 border-s border-gray-50" >{" "} Link in Bio</span>
               )}
-             
             </button>
             <AppMenu isOpen={isAppsOpen} onClose={() => setIsAppsOpen(false)} />
           </div>
@@ -97,24 +96,35 @@ const Header = () => {
           {/* User Avatar and Menu */}
           <div className="relative">
             <button
-              className="w-8 h-8 lg:w-auto lg:h-12  rounded-full bg-gray-200 flex items-center justify-center text-sm font-semibold text-gray-800 overflow-hidden"
+              className="w-8 h-8 lg:w-auto lg:h-12  rounded-full lg:bg-gray-200 flex items-center justify-center text-sm font-semibold text-gray-800 overflow-hidden"
               onClick={handleUserMenuClick}
             >
               {mockUser.avatar ? (
-                <img src={mockUser.avatar} alt={mockUser.name} className="w-auto ms-2 h-auto object-cover" />
+                <img
+                  src={mockUser.avatar}
+                  alt={mockUser.name}
+                  className="w-auto lg:ms-2 h-auto object-cover"
+                />
               ) : (
                 mockUser.initials
               )}
-               <Icon src={headerIcons.menu} className="w-6 h-6 mx-2 hidden lg:flex" alt="Menu" />
+              <Icon
+                src={headerIcons.menu}
+                className="w-6 h-6 mx-2 hidden lg:flex"
+                alt="Menu"
+              />
             </button>
-            <UserMenu isOpen={isUserMenuOpen} onClose={() => setIsUserMenuOpen(false)} />
+            <UserMenu
+              isOpen={isUserMenuOpen}
+              onClose={() => setIsUserMenuOpen(false)}
+            />
           </div>
         </div>
       </header>
 
       {/* Mobile Menu */}
-      <MobileMenu 
-        isOpen={isMobileMenuOpen} 
+      <MobileMenu
+        isOpen={isMobileMenuOpen}
         onClose={() => setIsMobileMenuOpen(false)}
         onAppsClick={handleAppsClick}
       />

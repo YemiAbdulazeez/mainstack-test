@@ -1,14 +1,24 @@
-import React, { useState, useRef } from 'react';
-import DatePicker from 'react-datepicker';
-import { format, startOfToday, endOfToday, subDays, startOfMonth, endOfMonth, subMonths } from 'date-fns';
-import { datePresets, transactionTypes, transactionStatuses } from '../../data/constants';
-import Icon from '../ui/Icon';
-import { useClickOutside } from '../../hooks/useClickOutside';
+import React, { useState, useRef } from "react";
+import DatePicker from "react-datepicker";
+import {
+  format,
+  startOfToday,
+  endOfToday,
+  subDays,
+  startOfMonth,
+  endOfMonth,
+  subMonths,
+} from "date-fns";
+import {
+  datePresets,
+  transactionTypes,
+  transactionStatuses,
+} from "../../data/constants";
+import Icon from "../ui/Icon";
+import { useClickOutside } from "../../hooks/useClickOutside";
 
-// Import the required CSS for react-datepicker
-import 'react-datepicker/dist/react-datepicker.css';
+import "react-datepicker/dist/react-datepicker.css";
 
-// Custom CSS to fix the calendar display and match the design
 const calendarStyles = `
 
 .react-datepicker-popper {
@@ -111,9 +121,9 @@ const calendarStyles = `
 }
 `;
 
-
 const FilterSidebar = ({ isOpen, onClose }) => {
-  const [selectedTransactionTypes, setSelectedTransactionTypes] = useState(transactionTypes);
+  const [selectedTransactionTypes, setSelectedTransactionTypes] =
+    useState(transactionTypes);
   const [selectedTransactionStatus, setSelectedTransactionStatus] = useState({
     Successful: true,
     Pending: true,
@@ -122,7 +132,7 @@ const FilterSidebar = ({ isOpen, onClose }) => {
 
   const [startDate, setStartDate] = useState(subDays(new Date(), 6));
   const [endDate, setEndDate] = useState(new Date());
-  const [selectedPreset, setSelectedPreset] = useState('Last 7 days');
+  const [selectedPreset, setSelectedPreset] = useState("Last 7 days");
 
   const [isTypeDropdownOpen, setIsTypeDropdownOpen] = useState(false);
   const [isStatusDropdownOpen, setIsStatusDropdownOpen] = useState(false);
@@ -140,7 +150,10 @@ const FilterSidebar = ({ isOpen, onClose }) => {
   useClickOutside(endDateRef, () => setIsEndDateOpen(false));
 
   const handleStatusChange = (status) => {
-    setSelectedTransactionStatus(prev => ({ ...prev, [status]: !prev[status] }));
+    setSelectedTransactionStatus((prev) => ({
+      ...prev,
+      [status]: !prev[status],
+    }));
   };
 
   const handlePresetClick = (preset) => {
@@ -148,19 +161,19 @@ const FilterSidebar = ({ isOpen, onClose }) => {
     const today = new Date();
 
     switch (preset.value) {
-      case 'today':
+      case "today":
         setStartDate(startOfToday());
         setEndDate(endOfToday());
         break;
-      case 'last7days':
+      case "last7days":
         setStartDate(subDays(today, 6));
         setEndDate(today);
         break;
-      case 'thismonth':
+      case "thismonth":
         setStartDate(startOfMonth(today));
         setEndDate(endOfMonth(today));
         break;
-      case 'last3months':
+      case "last3months":
         setStartDate(startOfMonth(subMonths(today, 2)));
         setEndDate(endOfMonth(today));
         break;
@@ -169,9 +182,10 @@ const FilterSidebar = ({ isOpen, onClose }) => {
     }
   };
 
-  const typeDisplay = selectedTransactionTypes.length === transactionTypes.length
-    ? "Store Transactions, Get Tipped, Withdrawals, Chargebacks, Ca..."
-    : selectedTransactionTypes.join(", ");
+  const typeDisplay =
+    selectedTransactionTypes.length === transactionTypes.length
+      ? "Store Transactions, Get Tipped, Withdrawals, Chargebacks, Ca..."
+      : selectedTransactionTypes.join(", ");
 
   const statusDisplay = Object.entries(selectedTransactionStatus)
     .filter(([_, isSelected]) => isSelected)
@@ -182,7 +196,7 @@ const FilterSidebar = ({ isOpen, onClose }) => {
     <button
       type="button"
       className={`text-center flex justify-between items-center px-3 py-3 border border-gray-300 rounded-xl w-48 shadow-sm text-sm transition-colors ${
-        isActive ? 'bg-gray-200' : 'bg-gray-200'
+        isActive ? "bg-gray-200" : "bg-gray-200"
       }`}
       onClick={onClick}
       ref={ref}
@@ -217,7 +231,9 @@ const FilterSidebar = ({ isOpen, onClose }) => {
               <div className="h-full flex flex-col bg-white shadow-xl">
                 {/* Header */}
                 <div className="p-4 lg:p-6 border-b border-gray-100 flex justify-between items-center">
-                  <h2 className="text-lg lg:text-xl font-semibold text-gray-900">Filter</h2>
+                  <h2 className="text-lg lg:text-xl font-semibold text-gray-900">
+                    Filter
+                  </h2>
                   <button
                     type="button"
                     onClick={onClose}
@@ -261,12 +277,20 @@ const FilterSidebar = ({ isOpen, onClose }) => {
                           startDate={startDate}
                           endDate={endDate}
                           // Fix 1: Pass formatted date to CustomInput for 'dd MMM yyyy' display
-                          customInput={<CustomInput isActive={isStartDateOpen} value={startDate ? format(startDate, 'dd MMM yyyy') : "Select date"} />}
+                          customInput={
+                            <CustomInput
+                              isActive={isStartDateOpen}
+                              value={
+                                startDate
+                                  ? format(startDate, "dd MMM yyyy")
+                                  : "Select date"
+                              }
+                            />
+                          }
                           onCalendarOpen={() => {
                             setIsStartDateOpen(true);
                             setIsEndDateOpen(false);
                           }}
-                         
                           onCalendarClose={() => setIsStartDateOpen(false)}
                           popperClassName="react-datepicker-popper z-50"
                           popperPlacement="bottom-start"
@@ -285,10 +309,13 @@ const FilterSidebar = ({ isOpen, onClose }) => {
                                 disabled={prevMonthButtonDisabled}
                                 className="p-1  rounded hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
                               >
-                                <Icon d="M15 19l-7-7 7-7" className="w-4 h-4 text-gray-600" />
+                                <Icon
+                                  d="M15 19l-7-7 7-7"
+                                  className="w-4 h-4 text-gray-600"
+                                />
                               </button>
                               <span className="text-sm font-semibold text-gray-900">
-                                {format(date, 'MMMM yyyy')}
+                                {format(date, "MMMM yyyy")}
                               </span>
                               <button
                                 type="button"
@@ -296,7 +323,10 @@ const FilterSidebar = ({ isOpen, onClose }) => {
                                 disabled={nextMonthButtonDisabled}
                                 className="p-1 rounded hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
                               >
-                                <Icon d="M9 5l7 7-7 7" className="w-4 h-4 text-gray-600" />
+                                <Icon
+                                  d="M9 5l7 7-7 7"
+                                  className="w-4 h-4 text-gray-600"
+                                />
                               </button>
                             </div>
                           )}
@@ -312,7 +342,16 @@ const FilterSidebar = ({ isOpen, onClose }) => {
                           endDate={endDate}
                           minDate={startDate}
                           // Fix 1: Pass formatted date to CustomInput for 'dd MMM yyyy' display
-                          customInput={<CustomInput isActive={isEndDateOpen} value={endDate ? format(endDate, 'dd MMM yyyy') : "Select date"} />}
+                          customInput={
+                            <CustomInput
+                              isActive={isEndDateOpen}
+                              value={
+                                endDate
+                                  ? format(endDate, "dd MMM yyyy")
+                                  : "Select date"
+                              }
+                            />
+                          }
                           onCalendarOpen={() => {
                             setIsEndDateOpen(true);
                             setIsStartDateOpen(false);
@@ -335,10 +374,13 @@ const FilterSidebar = ({ isOpen, onClose }) => {
                                 disabled={prevMonthButtonDisabled}
                                 className="p-1 rounded hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
                               >
-                                <Icon d="M15 19l-7-7 7-7" className="w-4 h-4 text-gray-600" />
+                                <Icon
+                                  d="M15 19l-7-7 7-7"
+                                  className="w-4 h-4 text-gray-600"
+                                />
                               </button>
                               <span className="text-sm font-semibold text-gray-900">
-                                {format(date, 'MMMM yyyy')}
+                                {format(date, "MMMM yyyy")}
                               </span>
                               <button
                                 type="button"
@@ -346,7 +388,10 @@ const FilterSidebar = ({ isOpen, onClose }) => {
                                 disabled={nextMonthButtonDisabled}
                                 className="p-1 rounded hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
                               >
-                                <Icon d="M9 5l7 7-7 7" className="w-4 h-4 text-gray-600" />
+                                <Icon
+                                  d="M9 5l7 7-7 7"
+                                  className="w-4 h-4 text-gray-600"
+                                />
                               </button>
                             </div>
                           )}
@@ -382,10 +427,10 @@ const FilterSidebar = ({ isOpen, onClose }) => {
                               type="checkbox"
                               checked={selectedTransactionTypes.includes(type)}
                               onChange={(e) => {
-                                setSelectedTransactionTypes(prev =>
+                                setSelectedTransactionTypes((prev) =>
                                   e.target.checked
                                     ? [...prev, type]
-                                    : prev.filter(t => t !== type)
+                                    : prev.filter((t) => t !== type)
                                 );
                               }}
                               className="h-4 w-4 text-gray-900 border-gray-300 rounded focus:ring-gray-900 focus:ring-2 cursor-pointer"
@@ -406,7 +451,9 @@ const FilterSidebar = ({ isOpen, onClose }) => {
                     </label>
                     <button
                       type="button"
-                      onClick={() => setIsStatusDropdownOpen(!isStatusDropdownOpen)}
+                      onClick={() =>
+                        setIsStatusDropdownOpen(!isStatusDropdownOpen)
+                      }
                       className="w-full text-left px-4 py-3 border bg-gray-200 border-gray-300 rounded-xl shadow-sm text-sm text-gray-900 flex justify-between items-center"
                     >
                       <span>{statusDisplay}</span>
@@ -451,7 +498,7 @@ const FilterSidebar = ({ isOpen, onClose }) => {
                       });
                       setStartDate(subDays(new Date(), 6));
                       setEndDate(new Date());
-                      setSelectedPreset('Last 7 days');
+                      setSelectedPreset("Last 7 days");
                     }}
                     className="w-full px-4 py-3 text-sm font-semibold rounded-full border border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors"
                   >
@@ -460,11 +507,11 @@ const FilterSidebar = ({ isOpen, onClose }) => {
                   <button
                     type="button"
                     onClick={() => {
-                      console.log('Applied filters:', {
+                      console.log("Applied filters:", {
                         startDate,
                         endDate,
                         selectedTransactionTypes,
-                        selectedTransactionStatus
+                        selectedTransactionStatus,
                       });
                       onClose();
                     }}

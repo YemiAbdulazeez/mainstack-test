@@ -18,7 +18,7 @@ const AppSidebar = () => {
 
       {/* Desktop Sidebar */}
       <div className="hidden lg:block fixed left-2 xl:left-8 top-1/2 -translate-y-1/2 z-20">
-        <div className="bg-white rounded-full shadow-xl p-2 space-y-3 transition-all duration-300">
+        <div className="bg-white rounded-full shadow-2xl p-2 space-y-3 transition-all duration-300">
           {sidebarApps.map((app, index) => (
             <div
               key={index}
@@ -33,13 +33,14 @@ const AppSidebar = () => {
                     : "bg-gray-100 group-hover:bg-gradient-to-br from-red-100 to-purple-100"
                 }`}
               >
+                {/* Apply filter to make icon gray when idle, remove on hover */}
                 <img
                   src={app.icon}
                   alt={app.name}
-                  className={`w-5 h-5 transition-colors duration-200 ${
+                  className={`w-5 h-5 transition-all duration-200 ${
                     app.active
-                      ? "text-purple-600"
-                      : "text-gray-400 group-hover:text-purple-600"
+                      ? "filter-none"
+                      : "filter grayscale group-hover:filter-none"
                   }`}
                 />
               </div>
@@ -72,17 +73,26 @@ const AppSidebar = () => {
               {sidebarApps.map((app, index) => (
                 <div
                   key={index}
-                  className="flex flex-col items-center p-3 rounded-xl hover:bg-white cursor-pointer"
+                  className="flex flex-col items-center p-3 rounded-xl hover:bg-white cursor-pointer group"
                   onClick={() => setIsMobileSidebarOpen(false)}
                 >
                   <div
                     className={`w-12 h-12 flex items-center justify-center rounded-full mb-2 ${
                       app.active
                         ? "bg-gradient-to-br from-red-100 to-purple-100"
-                        : "bg-gray-100"
+                        : "bg-gray-100 group-hover:bg-gradient-to-br from-red-100 to-purple-100"
                     }`}
                   >
-                    <img src={app.icon} alt={app.name} className="w-6 h-6" />
+                    {/* Apply the same gray/color logic for mobile */}
+                    <img 
+                      src={app.icon} 
+                      alt={app.name} 
+                      className={`w-6 h-6 transition-all duration-200 ${
+                        app.active
+                          ? "filter-none"
+                          : "filter grayscale group-hover:filter-none"
+                      }`}
+                    />
                   </div>
                   <span className="text-xs text-center font-medium">
                     {app.name}
